@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">assignment3</string>
     <string name="back_button" />
+    <string name="item_entry_title" />
+    <string name="no_item_description" />
+    <string name="in_stock" />
 </resources>
