@@ -15,7 +15,7 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun inventoryDatabase(
+    fun shoppingDatabase(
         @ApplicationContext context: Context
     ): ShoppingListDatabase = Room.databaseBuilder(context, ShoppingListDatabase::class.java, "item_database")
         .fallbackToDestructiveMigration()
