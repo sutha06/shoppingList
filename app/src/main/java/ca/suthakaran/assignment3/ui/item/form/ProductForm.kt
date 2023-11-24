@@ -15,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import ca.suthakaran.assignment3.R
+import ca.suthakaran.assignment3.ui.model.ProductFormModel
 import java.util.Currency
 import java.util.Locale
 @Composable

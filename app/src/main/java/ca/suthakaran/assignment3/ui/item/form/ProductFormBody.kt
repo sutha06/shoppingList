@@ -27,7 +27,7 @@ fun ProductFormBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
         ProductForm(
-            itemFormModel = productFormUiState.productFormModel,
+            productFormModel = productFormUiState.productFormModel,
             onNameChange = onNameChange,
             onPriceChange = onPriceChange,
             onQuantityChange = onQuantityChange,

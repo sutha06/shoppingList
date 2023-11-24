@@ -17,7 +17,7 @@ data class ProductFormModel(
     )
 }
 
-fun Product.toItemFormData(): ProductFormModel = ProductFormModel(
+fun Product.toProductFormData(): ProductFormModel = ProductFormModel(
     id = id,
     name = name,
     price = price.toString(),
