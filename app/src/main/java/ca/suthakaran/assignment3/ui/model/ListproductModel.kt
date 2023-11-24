@@ -1,7 +1,7 @@
 package ca.suthakaran.assignment3.ui.model
 
-import ca.suthakaran.assignment3.domain.Item
-import ca.suthakaran.assignment3.ui.common.currencyformat
+import ca.suthakaran.assignment3.domain.Product
+import ca.suthakaran.assignment3.ui.common.formatCurrency
 
 data class ListproductModel(
     val id: Int,
@@ -10,17 +10,17 @@ data class ListproductModel(
     val quantity: Int,
     val selected: Boolean
 ){
-    constructor(item: Item): this(
-        id = item.id,
-        name = item.name,
-        price = currencyformat(item.price),
-        quantity = item.quantity,
-        selected = item.selected
+    constructor(product: Product): this(
+        id = product.id,
+        name = product.name,
+        price = formatCurrency(product.price),
+        quantity = product.quantity,
+        selected = product.selected
     )
 
-    constructor(): this(Item())
+    constructor(): this(Product())
 }
 
-fun Item.toListProductModel() = ListproductModel(this)
+fun Product.toListProductModel() = ListproductModel(this)
 
 

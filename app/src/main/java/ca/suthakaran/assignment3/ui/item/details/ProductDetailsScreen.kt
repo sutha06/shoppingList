@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ca.suthakaran.assignment3.ui.details
+package ca.suthakaran.assignment3.ui.item.details
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -52,7 +52,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 import ca.suthakaran.assignment3.R
-import ca.suthakaran.assignment3.domain.Item
+import ca.suthakaran.assignment3.domain.Product
 import ca.suthakaran.assignment3.ui.common.ShoppingTopAppBar
 import ca.suthakaran.assignment3.ui.model.ProductDetailsModel
 import ca.suthakaran.assignment3.ui.navigation.ProductDetailsDestination
@@ -233,7 +233,7 @@ private fun DeleteConfirmationDialog(
 fun ProductDetailsScreenPreview() {
     ShoppingTheme {
         ProductDetailsBody(
-            ProductDetailsUiState(Item(
+            ProductDetailsUiState(Product(
                     1,
                     "Pen",
                     6.25,

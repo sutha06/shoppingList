@@ -15,4 +15,9 @@
     <string name="delete_question" />
     <string name="no" />
     <string name="yes" />
+    <string name="save_action" />
+    <string name="item_name_req" />
+    <string name="item_price_req" />
+    <string name="quantity_req" />
+    <string name="required_fields" />
 </resources>

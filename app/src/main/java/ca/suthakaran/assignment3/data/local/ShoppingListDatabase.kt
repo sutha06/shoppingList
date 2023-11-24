@@ -18,14 +18,12 @@ package ca.suthakaran.assignment3.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ca.suthakaran.assignment3.data.local.ItemDao
-import ca.suthakaran.assignment3.data.local.LocalItem
 
 /**
  * Database class with a singleton Instance object.
  */
-@Database(entities = [LocalItem::class], version = 2, exportSchema = false)
+@Database(entities = [LocalProduct::class], version = 2, exportSchema = false)
 abstract class ShoppingListDatabase : RoomDatabase() {
 
-    abstract fun itemDao(): ItemDao
+    abstract fun productDao(): ProductDao
 }

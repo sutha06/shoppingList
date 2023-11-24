@@ -22,38 +22,37 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import ca.suthakaran.assignment3.data.local.LocalItem
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Database access object to access the Inventory database
  */
 @Dao
-interface ItemDao {
+interface ProductDao {
 
-    @Query("SELECT * from items ORDER BY name ASC")
-    fun getAllItemsStream(): Flow<List<LocalItem>>
+    @Query("SELECT * from products ORDER BY name ASC")
+    fun getAllItemsStream(): Flow<List<LocalProduct>>
 
-    @Query("SELECT * from items WHERE id = :id")
-    fun getItemByIdStream(id: Int): Flow<LocalItem?>
+    @Query("SELECT * from products WHERE id = :id")
+    fun getProductByIdStream(id: Int): Flow<LocalProduct?>
 
     // Specify the conflict strategy as IGNORE, when the user tries to add an
     // existing Item into the database Room ignores the conflict.
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertItem(item: LocalItem)
+    suspend fun insertProduct(item: LocalProduct)
 
     @Update
-    suspend fun updateItem(item: LocalItem)
+    suspend fun updateProduct(item: LocalProduct)
 
-    @Query("UPDATE items SET quantity = :quantity WHERE id = :id")
-    suspend fun updateItemQuantityById(id: Int, quantity: Int)
+    @Query("UPDATE products SET quantity = :quantity WHERE id = :id")
+    suspend fun updateProductQuantityById(id: Int, quantity: Int)
 
-    @Query("UPDATE items SET selected = :selected WHERE id = :id")
-    suspend fun updateItemSelectedById(id: Int, selected: Boolean)
+    @Query("UPDATE products SET selected = :selected WHERE id = :id")
+    suspend fun updateProductSelectedById(id: Int, selected: Boolean)
 
     @Delete
-    suspend fun deleteItem(item: LocalItem)
+    suspend fun deleteProduct(item: LocalProduct)
 
-    @Query("DELETE FROM items WHERE id = :id")
-    suspend fun deleteItemById(id: Int)
+    @Query("DELETE FROM products WHERE id = :id")
+    suspend fun deleteProductById(id: Int)
 }

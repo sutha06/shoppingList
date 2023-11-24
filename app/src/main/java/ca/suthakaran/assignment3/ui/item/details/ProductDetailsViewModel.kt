@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package ca.suthakaran.assignment3.ui.details
+package ca.suthakaran.assignment3.ui.item.details
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ca.suthakaran.assignment3.data.repository.ItemsRepository
+import ca.suthakaran.assignment3.data.repository.ProductRepository
 import ca.suthakaran.assignment3.ui.navigation.ProductDetailsDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,22 +31,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * ViewModel to retrieve, update and delete an item from the [ItemsRepository]'s data source.
+ * ViewModel to retrieve, update and delete an item from the [ProductRepository]'s data source.
  */
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val itemsRepository: ItemsRepository,
+    private val productRepository: ProductRepository,
 ) : ViewModel() {
 
     private val itemId: Int = checkNotNull(savedStateHandle[ProductDetailsDestination.itemIdArg])
 
     /**
-     * Holds the item details ui state. The data is retrieved from [ItemsRepository] and mapped to
+     * Holds the item details ui state. The data is retrieved from [ProductRepository] and mapped to
      * the UI state.
      */
     val uiState: StateFlow<ProductDetailsUiState> =
-        itemsRepository.getItemByIdStream(itemId)
+        productRepository.getProductByIdStream(itemId)
             .filterNotNull()
             .map { item ->
                 ProductDetailsUiState(item)
@@ -57,22 +57,22 @@ class ProductDetailsViewModel @Inject constructor(
             )
 
     /**
-     * Reduces the item quantity by one and update the [ItemsRepository]'s data source.
+     * Reduces the item quantity by one and update the [ProductRepository]'s data source.
      */
     fun reduceQuantityByOne() {
         viewModelScope.launch {
             val currentItem = uiState.value.item
             if (currentItem.quantity > 0) {
-                itemsRepository.updateItemQuantityById(currentItem.id, currentItem.quantity - 1)
+                productRepository.updateProductQuantityById(currentItem.id, currentItem.quantity - 1)
             }
         }
     }
 
     /**
-     * Deletes the item from the [ItemsRepository]'s data source.
+     * Deletes the item from the [ProductRepository]'s data source.
      */
     fun deleteItem() = viewModelScope.launch{
-        itemsRepository.deleteItemById(uiState.value.item.id)
+        productRepository.deleteProductById(uiState.value.item.id)
     }
 
     companion object {

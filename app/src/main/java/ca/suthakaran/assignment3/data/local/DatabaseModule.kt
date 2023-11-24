@@ -23,5 +23,5 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun itemDao(database: ShoppingListDatabase): ItemDao = database.itemDao()
+    fun productDao(database: ShoppingListDatabase): ProductDao = database.productDao()
 }

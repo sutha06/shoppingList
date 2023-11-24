@@ -1,6 +1,6 @@
 package ca.suthakaran.assignment3.ui.model
-import ca.suthakaran.assignment3.domain.Item
-data class ItemFormModel(
+import ca.suthakaran.assignment3.domain.Product
+data class ProductFormModel(
     val id: Int = 0,
     val name: String = "",
     val price: String = "",
@@ -9,7 +9,7 @@ data class ItemFormModel(
     fun isValid(): Boolean =
         name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
 
-    fun toItem(): Item = Item(
+    fun toProduct(): Product = Product(
         id = id,
         name = name,
         price = price.toDoubleOrNull() ?: 0.0,
@@ -17,7 +17,7 @@ data class ItemFormModel(
     )
 }
 
-fun Item.toItemFormData(): ItemFormModel = ItemFormModel(
+fun Product.toItemFormData(): ProductFormModel = ProductFormModel(
     id = id,
     name = name,
     price = price.toString(),

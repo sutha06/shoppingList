@@ -22,8 +22,8 @@ import androidx.room.PrimaryKey
 /**
  * Entity data class represents a single row in the database.
  */
-@Entity(tableName = "items")
-data class LocalItem(
+@Entity(tableName = "products")
+data class LocalProduct(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,

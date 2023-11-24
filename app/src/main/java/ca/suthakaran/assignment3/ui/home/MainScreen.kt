@@ -53,7 +53,7 @@ import androidx.compose.ui.unit.dp
 import ca.suthakaran.assignment3.R
 import ca.suthakaran.assignment3.ui.common.ShoppingTopAppBar
 import ca.suthakaran.assignment3.ui.model.ListproductModel
-import ca.suthakaran.assignment3.domain.Item
+import ca.suthakaran.assignment3.domain.Product
 import ca.suthakaran.assignment3.ui.model.toListProductModel
 import ca.suthakaran.assignment3.ui.navigation.MainDestination
 import ca.suthakaran.assignment3.ui.theme.ShoppingTheme
@@ -199,9 +199,9 @@ private fun ShoppingItem(
 fun MainBodyPreview() {
     ShoppingTheme {
         HomeBody(listOf(
-            Item(1, "Game", 100.0, 20).toListProductModel(),
-            Item(2, "Pen", 200.0, 30, true).toListProductModel(),
-            Item(3, "TV", 300.0, 50).toListProductModel()
+            Product(1, "Game", 100.0, 20).toListProductModel(),
+            Product(2, "Pen", 200.0, 30, true).toListProductModel(),
+            Product(3, "TV", 300.0, 50).toListProductModel()
         ), onItemClick = {}, onToggleSelect = {})
     }
 }
@@ -219,7 +219,7 @@ fun MainBodyEmptyListPreview() {
 fun ShoppingProductPreview() {
     ShoppingTheme {
         ShoppingItem(
-            Item(1, "Game", 100.0, 20).toListProductModel(),
+            Product(1, "Game", 100.0, 20).toListProductModel(),
             onToggleSelect = {}
         )
     }
