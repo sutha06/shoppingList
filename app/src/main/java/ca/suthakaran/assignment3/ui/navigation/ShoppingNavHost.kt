@@ -28,8 +28,7 @@ import ca.suthakaran.assignment3.ui.home.MainScreen
 import ca.suthakaran.assignment3.ui.home.MainViewModel
 import ca.suthakaran.assignment3.ui.item.details.ProductDetailsScreen
 import ca.suthakaran.assignment3.ui.item.details.ProductDetailsViewModel
-
-import ca.suthakaran.assignment3.ui.item.edit.ItemEditScreen
+import ca.suthakaran.assignment3.ui.item.edit.ProductEditScreen
 import ca.suthakaran.assignment3.ui.item.edit.ProductEditViewModel
 import ca.suthakaran.assignment3.ui.item.entry.ProductEntryScreen
 import ca.suthakaran.assignment3.ui.item.entry.ProductEntryViewModel
@@ -80,7 +79,7 @@ fun ShoppingNavHost(
         }
         composable(
             route = ProductEditDestination.routeWithArgs,
-            arguments = listOf(navArgument(ProductEditDestination.itemIdArg) {
+            arguments = listOf(navArgument(ProductEditDestination.productIdArg) {
                 type = NavType.IntType
             })
         ) {

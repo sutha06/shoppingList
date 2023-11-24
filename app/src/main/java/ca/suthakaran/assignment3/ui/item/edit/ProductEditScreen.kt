@@ -28,7 +28,7 @@ import ca.suthakaran.assignment3.ui.navigation.ProductEditDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemEditScreen(
+fun ProductEditScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     viewModel: ProductEditViewModel,

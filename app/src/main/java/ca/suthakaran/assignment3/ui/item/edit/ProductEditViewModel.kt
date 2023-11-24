@@ -39,7 +39,7 @@ class ProductEditViewModel @Inject constructor(
     private val itemsRepository: ProductsRepository
 ) : FormViewModel() {
 
-    private val itemId: Int = checkNotNull(savedStateHandle[ProductEditDestination.itemIdArg])
+    private val itemId: Int = checkNotNull(savedStateHandle[ProductEditDestination.productIdArg])
 
     init {
         viewModelScope.launch {
