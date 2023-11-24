@@ -19,8 +19,8 @@ package ca.suthakaran.assignment3.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.suthakaran.assignment3.data.repository.ItemsRepository
-import ca.suthakaran.assignment3.ui.model.ListItemModel
-import ca.suthakaran.assignment3.ui.model.toListItemModel
+import ca.suthakaran.assignment3.ui.model.ListproductModel
+import ca.suthakaran.assignment3.ui.model.toListProductModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -43,14 +43,14 @@ class MainViewModel @Inject constructor(
      */
     val mainUiState: StateFlow<MainUiState> =
         itemsRepository.getAllItemsStream()
-            .map { list -> MainUiState(list.map { item -> item.toListItemModel() }) }
+            .map { list -> MainUiState(list.map { item -> item.toListProductModel() }) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
                 initialValue = MainUiState()
             )
 
-    fun toggleSelect(item: ListItemModel) {
+    fun toggleSelect(item: ListproductModel) {
         viewModelScope.launch {
                 itemsRepository.updateItemSelectedById(item.id, !item.selected)
         }

@@ -19,7 +19,7 @@ import ca.suthakaran.assignment3.R
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InventoryTopAppBar(
+fun ShoppingTopAppBar(
     title: String,
     canNavigateBack: Boolean,
     modifier: Modifier = Modifier,

@@ -6,4 +6,13 @@
     <string name="in_stock" />
     <string name="edit_item_title" />
     <string name="item_detail_title" />
+    <string name="sell" />
+    <string name="delete" />
+    <string name="product" />
+    <string name="quantity_in_stock" />
+    <string name="price" />
+    <string name="attention" />
+    <string name="delete_question" />
+    <string name="no" />
+    <string name="yes" />
 </resources>

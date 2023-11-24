@@ -2,4 +2,5 @@
 <resources>
     <dimen name="padding_large" />
     <dimen name="padding_small" />
+    <dimen name="padding_medium" />
 </resources>

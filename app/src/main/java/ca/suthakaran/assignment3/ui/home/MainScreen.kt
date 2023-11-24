@@ -51,10 +51,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ca.suthakaran.assignment3.R
-import ca.suthakaran.assignment3.ui.common.InventoryTopAppBar
-import ca.suthakaran.assignment3.ui.model.ListItemModel
+import ca.suthakaran.assignment3.ui.common.ShoppingTopAppBar
+import ca.suthakaran.assignment3.ui.model.ListproductModel
 import ca.suthakaran.assignment3.domain.Item
-import ca.suthakaran.assignment3.ui.model.toListItemModel
+import ca.suthakaran.assignment3.ui.model.toListProductModel
 import ca.suthakaran.assignment3.ui.navigation.MainDestination
 import ca.suthakaran.assignment3.ui.theme.ShoppingTheme
 
@@ -64,19 +64,19 @@ import ca.suthakaran.assignment3.ui.theme.ShoppingTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(
+fun MainScreen(
     navigateToItemEntry: () -> Unit,
     navigateToItemDetails: (Int) -> Unit,
     viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
-    val homeUiState:MainUiState by viewModel.mainUiState.collectAsState()
+    val mainUiState:MainUiState by viewModel.mainUiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            InventoryTopAppBar(
+            ShoppingTopAppBar(
                 title = stringResource(MainDestination.titleRes),
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior
@@ -96,7 +96,7 @@ fun HomeScreen(
         },
     ) { innerPadding ->
         HomeBody(
-            itemList = homeUiState.itemList,
+            productList = mainUiState.itemList,
             onItemClick = navigateToItemDetails,
             onToggleSelect = viewModel::toggleSelect,
             modifier = modifier
@@ -108,16 +108,16 @@ fun HomeScreen(
 
 @Composable
 private fun HomeBody(
-    itemList: List<ListItemModel>,
+    productList: List<ListproductModel>,
     onItemClick: (Int) -> Unit,
-    onToggleSelect: (ListItemModel) -> Unit,
+    onToggleSelect: (ListproductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        if (itemList.isEmpty()) {
+        if (productList.isEmpty()) {
             Text(
                 text = stringResource(R.string.no_item_description),
                 textAlign = TextAlign.Center,
@@ -125,7 +125,7 @@ private fun HomeBody(
             )
         } else {
             ShoppingList(
-                itemList = itemList,
+                productList = productList,
                 onItemClick = onItemClick,
                 onToggleSelect = onToggleSelect,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
@@ -136,13 +136,13 @@ private fun HomeBody(
 
 @Composable
 private fun ShoppingList(
-    itemList: List<ListItemModel>,
+    productList: List<ListproductModel>,
     onItemClick: (Int) -> Unit,
-    onToggleSelect: (ListItemModel) -> Unit,
+    onToggleSelect: (ListproductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
-        items(items = itemList, key = { it.id }) { item ->
+        items(items = productList, key = { it.id }) { item ->
             ShoppingItem(
                 item = item,
                 onToggleSelect = onToggleSelect,
@@ -155,8 +155,8 @@ private fun ShoppingList(
 
 @Composable
 private fun ShoppingItem(
-    item: ListItemModel,
-    onToggleSelect: (ListItemModel) -> Unit,
+    item: ListproductModel,
+    onToggleSelect: (ListproductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -196,19 +196,19 @@ private fun ShoppingItem(
 
 @Preview(showBackground = true)
 @Composable
-fun HomeBodyPreview() {
+fun MainBodyPreview() {
     ShoppingTheme {
         HomeBody(listOf(
-            Item(1, "Game", 100.0, 20).toListItemModel(),
-            Item(2, "Pen", 200.0, 30, true).toListItemModel(),
-            Item(3, "TV", 300.0, 50).toListItemModel()
+            Item(1, "Game", 100.0, 20).toListProductModel(),
+            Item(2, "Pen", 200.0, 30, true).toListProductModel(),
+            Item(3, "TV", 300.0, 50).toListProductModel()
         ), onItemClick = {}, onToggleSelect = {})
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HomeBodyEmptyListPreview() {
+fun MainBodyEmptyListPreview() {
     ShoppingTheme {
         HomeBody(listOf(), onItemClick = {}, onToggleSelect = {})
     }
@@ -216,10 +216,10 @@ fun HomeBodyEmptyListPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun InventoryItemPreview() {
+fun ShoppingProductPreview() {
     ShoppingTheme {
         ShoppingItem(
-            Item(1, "Game", 100.0, 20).toListItemModel(),
+            Item(1, "Game", 100.0, 20).toListProductModel(),
             onToggleSelect = {}
         )
     }
