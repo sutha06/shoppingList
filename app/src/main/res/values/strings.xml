@@ -4,4 +4,6 @@
     <string name="item_entry_title" />
     <string name="no_item_description" />
     <string name="in_stock" />
+    <string name="edit_item_title" />
+    <string name="item_detail_title" />
 </resources>
