@@ -19,7 +19,7 @@ package ca.suthakaran.assignment3.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.suthakaran.assignment3.data.repository.ProductRepository
-import ca.suthakaran.assignment3.ui.model.ListproductModel
+import ca.suthakaran.assignment3.ui.model.ListProductModel
 import ca.suthakaran.assignment3.ui.model.toListProductModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -34,7 +34,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val productRepository: ProductRepository
+    private val productsRepository: ProductRepository
 ) : ViewModel() {
 
     /**
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
      * [MainUiState]
      */
     val mainUiState: StateFlow<MainUiState> =
-        productRepository.getAllProductsStream()
+        productsRepository.getAllProductsStream()
             .map { list -> MainUiState(list.map { item -> item.toListProductModel() }) }
             .stateIn(
                 scope = viewModelScope,
@@ -50,9 +50,9 @@ class MainViewModel @Inject constructor(
                 initialValue = MainUiState()
             )
 
-    fun toggleSelect(item: ListproductModel) {
+    fun toggleSelect(item: ListProductModel) {
         viewModelScope.launch {
-                productRepository.updateProductSelectedById(item.id, !item.selected)
+                productsRepository.updateProductSelectedById(item.id, !item.selected)
         }
     }
 

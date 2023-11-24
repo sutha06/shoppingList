@@ -39,17 +39,17 @@ class ProductDetailsViewModel @Inject constructor(
     private val productRepository: ProductRepository,
 ) : ViewModel() {
 
-    private val itemId: Int = checkNotNull(savedStateHandle[ProductDetailsDestination.itemIdArg])
+    private val productId: Int = checkNotNull(savedStateHandle[ProductDetailsDestination.productIdArg])
 
     /**
      * Holds the item details ui state. The data is retrieved from [ProductRepository] and mapped to
      * the UI state.
      */
     val uiState: StateFlow<ProductDetailsUiState> =
-        productRepository.getProductByIdStream(itemId)
+        productRepository.getProductByIdStream(productId)
             .filterNotNull()
-            .map { item ->
-                ProductDetailsUiState(item)
+            .map { product ->
+                ProductDetailsUiState(product)
             }.stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
@@ -61,7 +61,7 @@ class ProductDetailsViewModel @Inject constructor(
      */
     fun reduceQuantityByOne() {
         viewModelScope.launch {
-            val currentItem = uiState.value.item
+            val currentItem = uiState.value.product
             if (currentItem.quantity > 0) {
                 productRepository.updateProductQuantityById(currentItem.id, currentItem.quantity - 1)
             }
@@ -72,7 +72,7 @@ class ProductDetailsViewModel @Inject constructor(
      * Deletes the item from the [ProductRepository]'s data source.
      */
     fun deleteItem() = viewModelScope.launch{
-        productRepository.deleteProductById(uiState.value.item.id)
+        productRepository.deleteProductById(uiState.value.product.id)
     }
 
     companion object {

@@ -52,7 +52,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ca.suthakaran.assignment3.R
 import ca.suthakaran.assignment3.ui.common.ShoppingTopAppBar
-import ca.suthakaran.assignment3.ui.model.ListproductModel
+import ca.suthakaran.assignment3.ui.model.ListProductModel
 import ca.suthakaran.assignment3.domain.Product
 import ca.suthakaran.assignment3.ui.model.toListProductModel
 import ca.suthakaran.assignment3.ui.navigation.MainDestination
@@ -65,8 +65,8 @@ import ca.suthakaran.assignment3.ui.theme.ShoppingTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(
-    navigateToItemEntry: () -> Unit,
-    navigateToItemDetails: (Int) -> Unit,
+    navigateToProductEntry: () -> Unit,
+    navigateToProductDetails: (Int) -> Unit,
     viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
@@ -84,7 +84,7 @@ fun MainScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = navigateToItemEntry,
+                onClick = navigateToProductEntry,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
             ) {
@@ -95,9 +95,9 @@ fun MainScreen(
             }
         },
     ) { innerPadding ->
-        HomeBody(
+        MainBody(
             productList = mainUiState.itemList,
-            onItemClick = navigateToItemDetails,
+            onItemClick = navigateToProductDetails,
             onToggleSelect = viewModel::toggleSelect,
             modifier = modifier
                 .padding(innerPadding)
@@ -107,10 +107,10 @@ fun MainScreen(
 }
 
 @Composable
-private fun HomeBody(
-    productList: List<ListproductModel>,
+private fun MainBody(
+    productList: List<ListProductModel>,
     onItemClick: (Int) -> Unit,
-    onToggleSelect: (ListproductModel) -> Unit,
+    onToggleSelect: (ListProductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -136,14 +136,14 @@ private fun HomeBody(
 
 @Composable
 private fun ShoppingList(
-    productList: List<ListproductModel>,
+    productList: List<ListProductModel>,
     onItemClick: (Int) -> Unit,
-    onToggleSelect: (ListproductModel) -> Unit,
+    onToggleSelect: (ListProductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
         items(items = productList, key = { it.id }) { item ->
-            ShoppingItem(
+            ShoppingProduct(
                 item = item,
                 onToggleSelect = onToggleSelect,
                 modifier = Modifier
@@ -154,9 +154,9 @@ private fun ShoppingList(
 }
 
 @Composable
-private fun ShoppingItem(
-    item: ListproductModel,
-    onToggleSelect: (ListproductModel) -> Unit,
+private fun ShoppingProduct(
+    item: ListProductModel,
+    onToggleSelect: (ListProductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -198,7 +198,7 @@ private fun ShoppingItem(
 @Composable
 fun MainBodyPreview() {
     ShoppingTheme {
-        HomeBody(listOf(
+        MainBody(listOf(
             Product(1, "Game", 100.0, 20).toListProductModel(),
             Product(2, "Pen", 200.0, 30, true).toListProductModel(),
             Product(3, "TV", 300.0, 50).toListProductModel()
@@ -210,7 +210,7 @@ fun MainBodyPreview() {
 @Composable
 fun MainBodyEmptyListPreview() {
     ShoppingTheme {
-        HomeBody(listOf(), onItemClick = {}, onToggleSelect = {})
+        MainBody(listOf(), onItemClick = {}, onToggleSelect = {})
     }
 }
 
@@ -218,7 +218,7 @@ fun MainBodyEmptyListPreview() {
 @Composable
 fun ShoppingProductPreview() {
     ShoppingTheme {
-        ShoppingItem(
+        ShoppingProduct(
             Product(1, "Game", 100.0, 20).toListProductModel(),
             onToggleSelect = {}
         )

@@ -3,7 +3,7 @@ package ca.suthakaran.assignment3.ui.model
 import ca.suthakaran.assignment3.domain.Product
 import ca.suthakaran.assignment3.ui.common.formatCurrency
 
-data class ListproductModel(
+data class ListProductModel(
     val id: Int,
     val name: String,
     val price: String,
@@ -21,6 +21,6 @@ data class ListproductModel(
     constructor(): this(Product())
 }
 
-fun Product.toListProductModel() = ListproductModel(this)
+fun Product.toListProductModel() = ListProductModel(this)
 
 

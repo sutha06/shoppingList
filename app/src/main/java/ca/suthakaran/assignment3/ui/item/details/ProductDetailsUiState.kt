@@ -10,11 +10,11 @@ import ca.suthakaran.assignment3.ui.model.toItemDetailsModel
  */
 data class ProductDetailsUiState(
     val outOfStock: Boolean,
-    val item: ProductDetailsModel
+    val product: ProductDetailsModel
 ){
     constructor(product: Product): this (
         outOfStock = product.quantity <= 0,
-        item = product.toItemDetailsModel()
+        product = product.toItemDetailsModel()
     )
 
     constructor(): this(Product())

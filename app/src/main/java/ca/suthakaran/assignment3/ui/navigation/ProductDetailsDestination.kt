@@ -5,6 +5,6 @@ import ca.suthakaran.assignment3.R
 object ProductDetailsDestination : NavigationDestination {
     override val route = "item_details"
     override val titleRes = R.string.item_detail_title
-    const val itemIdArg = "itemId"
-    val routeWithArgs = "$route/{$itemIdArg}"
+    const val productIdArg = "itemId"
+    val routeWithArgs = "$route/{$productIdArg}"
 }

@@ -61,7 +61,7 @@ import ca.suthakaran.assignment3.ui.theme.ShoppingTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductDetailsScreen(
-    navigateToEditItem: (Int) -> Unit,
+    navigateToEditProduct: (Int) -> Unit,
     navigateBack: () -> Unit,
     viewModel: ProductDetailsViewModel,
     modifier: Modifier = Modifier
@@ -76,7 +76,7 @@ fun ProductDetailsScreen(
             )
         }, floatingActionButton = {
             FloatingActionButton(
-                onClick = { navigateToEditItem(uiState.value.item.id) },
+                onClick = { navigateToEditProduct(uiState.value.product.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
 
@@ -115,7 +115,7 @@ private fun ProductDetailsBody(
     ) {
         var showConfirmationDialog by rememberSaveable { mutableStateOf(false) }
         ProductDetails(
-            item = productDetailsUiState.item, modifier = Modifier.fillMaxWidth()
+            product = productDetailsUiState.product, modifier = Modifier.fillMaxWidth()
         )
         Button(
             onClick = onSellItem,
@@ -148,7 +148,7 @@ private fun ProductDetailsBody(
 
 @Composable
 fun ProductDetails(
-    item: ProductDetailsModel, modifier: Modifier = Modifier
+    product: ProductDetailsModel, modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
@@ -164,7 +164,7 @@ fun ProductDetails(
         ) {
             ProductDetailsRow(
                 labelResID = R.string.product,
-                productDetail = item.name,
+                productDetail = product.name,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -174,7 +174,7 @@ fun ProductDetails(
             )
             ProductDetailsRow(
                 labelResID = R.string.quantity_in_stock,
-                productDetail = item.quantity.toString(),
+                productDetail = product.quantity.toString(),
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
@@ -184,7 +184,7 @@ fun ProductDetails(
             )
             ProductDetailsRow(
                 labelResID = R.string.price,
-                productDetail = item.price,
+                productDetail = product.price,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(
                         id = R.dimen
