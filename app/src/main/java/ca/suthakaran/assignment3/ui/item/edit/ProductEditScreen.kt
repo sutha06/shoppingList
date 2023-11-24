@@ -22,9 +22,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.inventory.ui.common.InventoryTopAppBar
-import com.example.inventory.ui.item.form.ItemFormBody
-import com.example.inventory.ui.navigation.ItemEditDestination
+import ca.suthakaran.assignment3.ui.common.ShoppingTopAppBar
+import ca.suthakaran.assignment3.ui.item.form.ProductFormBody
+import ca.suthakaran.assignment3.ui.navigation.ProductEditDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +36,7 @@ fun ItemEditScreen(
 ) {
     Scaffold(
         topBar = {
-            InventoryTopAppBar(
+            ShoppingTopAppBar(
                 title = stringResource(ProductEditDestination.titleRes),
                 canNavigateBack = true,
                 navigateUp = onNavigateUp
@@ -44,8 +44,8 @@ fun ItemEditScreen(
         },
         modifier = modifier
     ) { innerPadding ->
-        ItemFormBody(
-            itemFormUiState = viewModel.uiState,
+        ProductFormBody(
+            productFormUiState = viewModel.uiState,
             onNameChange = viewModel::onNameChange,
             onPriceChange = viewModel::onPriceChange,
             onQuantityChange = viewModel::onQuantityChange,
