@@ -17,11 +17,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(DelicateCoroutinesApi::class)
-class LocalProductRepository(
+class LocalProductsRepository(
     private val productDao: ProductDao,
     private val externalScope: CoroutineScope,
     private val dispatcher: CoroutineDispatcher
-) : ProductRepository {
+) : ProductsRepository {
 
     @Inject
     constructor(productDao: ProductDao) : this(productDao, GlobalScope, Dispatchers.IO)

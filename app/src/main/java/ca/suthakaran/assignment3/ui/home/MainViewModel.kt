@@ -18,7 +18,7 @@ package ca.suthakaran.assignment3.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ca.suthakaran.assignment3.data.repository.ProductRepository
+import ca.suthakaran.assignment3.data.repository.ProductsRepository
 import ca.suthakaran.assignment3.ui.model.ListProductModel
 import ca.suthakaran.assignment3.ui.model.toListProductModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,11 +34,11 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val productsRepository: ProductRepository
+    private val productsRepository: ProductsRepository
 ) : ViewModel() {
 
     /**
-     * Holds home ui state. The list of items are retrieved from [ProductRepository] and mapped to
+     * Holds home ui state. The list of items are retrieved from [ProductsRepository] and mapped to
      * [MainUiState]
      */
     val mainUiState: StateFlow<MainUiState> =
