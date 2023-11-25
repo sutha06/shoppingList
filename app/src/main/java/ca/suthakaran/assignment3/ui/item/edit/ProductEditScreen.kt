@@ -53,6 +53,7 @@ fun ProductEditScreen(
                 viewModel.updateItem()
                 navigateBack()
             },
+            onBrandNameChange = viewModel::onBrandNameChange,
             modifier = Modifier.padding(innerPadding)
         )
     }

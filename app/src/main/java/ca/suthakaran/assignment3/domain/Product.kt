@@ -9,5 +9,6 @@ data class Product(
     val name: String = "No Name",
     val price: Double = 0.0,
     val quantity: Int = 0,
-    val selected: Boolean = false
+    val selected: Boolean = false,
+    val brandName: String = "No Brand"
 )

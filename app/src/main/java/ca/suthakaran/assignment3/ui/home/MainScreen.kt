@@ -97,7 +97,7 @@ fun MainScreen(
     ) { innerPadding ->
         MainBody(
             productList = mainUiState.productList,
-            onItemClick = navigateToProductDetails,
+            onProductClick = navigateToProductDetails,
             onToggleSelect = viewModel::toggleSelect,
             modifier = modifier
                 .padding(innerPadding)
@@ -109,7 +109,7 @@ fun MainScreen(
 @Composable
 private fun MainBody(
     productList: List<ListProductModel>,
-    onItemClick: (Int) -> Unit,
+    onProductClick: (Int) -> Unit,
     onToggleSelect: (ListProductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -126,7 +126,7 @@ private fun MainBody(
         } else {
             ShoppingList(
                 productList = productList,
-                onItemClick = onItemClick,
+                onProductClick = onProductClick,
                 onToggleSelect = onToggleSelect,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
@@ -137,25 +137,25 @@ private fun MainBody(
 @Composable
 private fun ShoppingList(
     productList: List<ListProductModel>,
-    onItemClick: (Int) -> Unit,
+    onProductClick: (Int) -> Unit,
     onToggleSelect: (ListProductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
-        items(items = productList, key = { it.id }) { item ->
+        items(items = productList, key = { it.id }) { product ->
             ShoppingProduct(
-                item = item,
+                product = product,
                 onToggleSelect = onToggleSelect,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
-                    .clickable { onItemClick(item.id) })
+                    .clickable { onProductClick(product.id) })
         }
     }
 }
 
 @Composable
 private fun ShoppingProduct(
-    item: ListProductModel,
+    product: ListProductModel,
     onToggleSelect: (ListProductModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -167,7 +167,7 @@ private fun ShoppingProduct(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
-            Checkbox(checked = item.selected, onCheckedChange = { onToggleSelect(item)})
+            Checkbox(checked = product.selected, onCheckedChange = { onToggleSelect(product)})
             Column(
                 verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
             ){
@@ -175,17 +175,21 @@ private fun ShoppingProduct(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = item.name,
+                        text = product.name,
                         style = MaterialTheme.typography.titleLarge,
                     )
                     Spacer(Modifier.weight(1f))
                     Text(
-                        text = item.price,
+                        text = product.price,
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
                 Text(
-                    text = stringResource(R.string.in_stock, item.quantity),
+                    text = stringResource(R.string.in_stock, product.quantity),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text =  product.brandName,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -199,10 +203,10 @@ private fun ShoppingProduct(
 fun MainBodyPreview() {
     ShoppingTheme {
         MainBody(listOf(
-            Product(1, "Game", 100.0, 20).toListProductModel(),
-            Product(2, "Pen", 200.0, 30, true).toListProductModel(),
-            Product(3, "TV", 300.0, 50).toListProductModel()
-        ), onItemClick = {}, onToggleSelect = {})
+            Product(1, "Game", 100.0, 20, brandName = "Rockstar").toListProductModel(),
+            Product(2, "Pen", 200.0, 30, true, "Bic").toListProductModel(),
+            Product(3, "TV", 300.0, 50, brandName = "Sony").toListProductModel()
+        ), onProductClick = {}, onToggleSelect = {})
     }
 }
 
@@ -210,7 +214,7 @@ fun MainBodyPreview() {
 @Composable
 fun MainBodyEmptyListPreview() {
     ShoppingTheme {
-        MainBody(listOf(), onItemClick = {}, onToggleSelect = {})
+        MainBody(listOf(), onProductClick = {}, onToggleSelect = {})
     }
 }
 
@@ -219,7 +223,7 @@ fun MainBodyEmptyListPreview() {
 fun ShoppingProductPreview() {
     ShoppingTheme {
         ShoppingProduct(
-            Product(1, "Game", 100.0, 20).toListProductModel(),
+            Product(1, "Game", 100.0, 20, brandName = "Ubisoft").toListProductModel(),
             onToggleSelect = {}
         )
     }

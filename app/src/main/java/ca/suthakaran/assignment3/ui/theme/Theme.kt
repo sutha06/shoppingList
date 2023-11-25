@@ -23,8 +23,8 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
-    secondary = md_theme_light_secondaryContainer,
-    tertiary = md_theme_light_tertiary
+    secondary = md_theme_light_secondary,
+    tertiary = md_theme_light_onBackground
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

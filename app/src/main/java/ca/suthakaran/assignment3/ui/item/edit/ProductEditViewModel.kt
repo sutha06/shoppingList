@@ -31,19 +31,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * ViewModel to retrieve and update an item from the [ItemsRepository]'s data source.
+ * ViewModel to retrieve and update an item from the [ProductsRepository]'s data source.
  */
 @HiltViewModel
 class ProductEditViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val itemsRepository: ProductsRepository
+    private val productsRepository: ProductsRepository
 ) : FormViewModel() {
 
     private val itemId: Int = checkNotNull(savedStateHandle[ProductEditDestination.productIdArg])
 
     init {
         viewModelScope.launch {
-            uiState = itemsRepository.getProductByIdStream(itemId)
+            uiState = productsRepository.getProductByIdStream(itemId)
                 .filterNotNull()
                 .first()
                 .toProductFormUiState(isEntryValid = true)
@@ -56,7 +56,7 @@ class ProductEditViewModel @Inject constructor(
     fun updateItem() = viewModelScope.launch {
         val formData: ProductFormModel = uiState.productFormModel
         if (formData.isValid()) {
-            itemsRepository.updateProduct(formData.toProduct())
+            productsRepository.updateProduct(formData.toProduct())
         }
     }
 }

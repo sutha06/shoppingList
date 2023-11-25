@@ -8,14 +8,18 @@ data class ListProductModel(
     val name: String,
     val price: String,
     val quantity: Int,
-    val selected: Boolean
+    val selected: Boolean,
+    val brandName: String
 ){
+
+
     constructor(product: Product): this(
         id = product.id,
         name = product.name,
         price = formatCurrency(product.price),
         quantity = product.quantity,
-        selected = product.selected
+        selected = product.selected,
+        brandName = product.brandName
     )
 
     constructor(): this(Product())

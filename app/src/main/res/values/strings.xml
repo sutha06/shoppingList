@@ -20,5 +20,9 @@
     <string name="sell">Sell</string>
     <string name="yes">Yes</string>
     <string name="required_fields">*required fields</string>
-    <string name="product" />
+
+    <string name="brandName" />
+    <string name="brandNamed">Brand Name*</string>
+    <string name="brandname">Brand Name</string>
+    <string name="product">Product Name</string>
 </resources>

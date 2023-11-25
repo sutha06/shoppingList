@@ -27,7 +27,7 @@ class LocalProductsRepository(
     constructor(productDao: ProductDao) : this(productDao, GlobalScope, Dispatchers.IO)
 
     override fun getAllProductsStream(): Flow<List<Product>> =
-        productDao.getAllItemsStream()
+        productDao.getAllProductsStream()
             .map{ list -> list.map { localItem ->  localItem.toProduct() }}
             .flowOn(dispatcher)
 
@@ -66,7 +66,8 @@ fun LocalProduct.toProduct(): Product = Product(
     name = this.name,
     price = this.price,
     quantity = this.quantity,
-    selected = this.selected
+    selected = this.selected,
+    brandName = this.brandname
 )
 
 fun Product.toLocalProduct(): LocalProduct = LocalProduct(
@@ -74,5 +75,6 @@ fun Product.toLocalProduct(): LocalProduct = LocalProduct(
     name = this.name,
     price = this.price,
     quantity = this.quantity,
-    selected = this.selected
+    selected = this.selected,
+    brandname = this.brandName
 )

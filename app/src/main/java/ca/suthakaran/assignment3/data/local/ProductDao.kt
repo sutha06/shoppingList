@@ -30,8 +30,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ProductDao {
 
-    @Query("SELECT * from products ORDER BY name ASC")
-    fun getAllItemsStream(): Flow<List<LocalProduct>>
+    @Query("SELECT * from products ORDER BY name, brandname ASC")
+    fun getAllProductsStream(): Flow<List<LocalProduct>>
 
     @Query("SELECT * from products WHERE id = :id")
     fun getProductByIdStream(id: Int): Flow<LocalProduct?>
@@ -39,10 +39,10 @@ interface ProductDao {
     // Specify the conflict strategy as IGNORE, when the user tries to add an
     // existing Item into the database Room ignores the conflict.
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertProduct(item: LocalProduct)
+    suspend fun insertProduct(product: LocalProduct)
 
     @Update
-    suspend fun updateProduct(item: LocalProduct)
+    suspend fun updateProduct(product: LocalProduct)
 
     @Query("UPDATE products SET quantity = :quantity WHERE id = :id")
     suspend fun updateProductQuantityById(id: Int, quantity: Int)
@@ -50,8 +50,11 @@ interface ProductDao {
     @Query("UPDATE products SET selected = :selected WHERE id = :id")
     suspend fun updateProductSelectedById(id: Int, selected: Boolean)
 
+
+
+
     @Delete
-    suspend fun deleteProduct(item: LocalProduct)
+    suspend fun deleteProduct(product: LocalProduct)
 
     @Query("DELETE FROM products WHERE id = :id")
     suspend fun deleteProductById(id: Int)

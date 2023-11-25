@@ -21,12 +21,14 @@ abstract class FormViewModel(
 
     fun onQuantityChange(newQuantity: String) =
         updateUiState(uiState.productFormModel.copy(quantity = newQuantity))
+    fun onBrandNameChange(newBrandName: String) =
+        updateUiState(uiState.productFormModel.copy(brandName = newBrandName))
 
-    private fun updateUiState(itemFormModel: ProductFormModel) {
+    private fun updateUiState(productFormModel: ProductFormModel) {
         uiState =
             ProductFormUiState(
-                productFormModel = itemFormModel,
-                isEntryValid = itemFormModel.isValid()
+                productFormModel = productFormModel,
+                isEntryValid = productFormModel.isValid()
             )
     }
 }

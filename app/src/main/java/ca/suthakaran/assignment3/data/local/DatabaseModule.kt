@@ -17,7 +17,7 @@ object DatabaseModule {
     @Provides
     fun shoppingDatabase(
         @ApplicationContext context: Context
-    ): ShoppingListDatabase = Room.databaseBuilder(context, ShoppingListDatabase::class.java, "item_database")
+    ): ShoppingListDatabase = Room.databaseBuilder(context, ShoppingListDatabase::class.java, "product_database")
         .fallbackToDestructiveMigration()
         .build()
 

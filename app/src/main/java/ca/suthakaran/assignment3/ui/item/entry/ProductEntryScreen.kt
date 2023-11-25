@@ -59,6 +59,7 @@ fun ProductEntryScreen(
                 viewModel.saveItem()
                 navigateBack()
             },
+            onBrandNameChange = viewModel::onBrandNameChange,
             modifier = Modifier
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
@@ -74,11 +75,11 @@ private fun ItemEntryScreenPreview() {
         ProductFormBody(
             productFormUiState = ProductFormUiState(
                 ProductFormModel(
-                    name = "Item name", price = "10.00", quantity = "5"
+                    name = "Product name", price = "10.00", quantity = "5",
                 )
             ),
             onNameChange = {}, onPriceChange = {}, onQuantityChange = {},
-            onSaveClick = {}
+            onSaveClick = {}, onBrandNameChange = {}
         )
     }
 }

@@ -5,7 +5,10 @@ data class ProductFormModel(
     val name: String = "",
     val price: String = "",
     val quantity: String = "",
+    val brandName: String = ""
 ) {
+
+
     fun isValid(): Boolean =
         name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
 
@@ -13,7 +16,8 @@ data class ProductFormModel(
         id = id,
         name = name,
         price = price.toDoubleOrNull() ?: 0.0,
-        quantity = quantity.toIntOrNull() ?: 0
+        quantity = quantity.toIntOrNull() ?: 0,
+        brandName = brandName
     )
 }
 
@@ -21,5 +25,6 @@ fun Product.toProductFormData(): ProductFormModel = ProductFormModel(
     id = id,
     name = name,
     price = price.toString(),
-    quantity = quantity.toString()
+    quantity = quantity.toString(),
+    brandName = brandName
 )

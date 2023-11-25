@@ -7,13 +7,17 @@ data class ProductDetailsModel(
     val id: Int,
     val name: String,
     val price: String,
-    val quantity: Int
+    val quantity: Int,
+    val brandName: String
 ){
+
+
     constructor(product: Product): this(
         id = product.id,
         name = product.name,
         price = formatCurrency(product.price),
-        quantity = product.quantity
+        quantity = product.quantity,
+        brandName = product.brandName
     )
 
     constructor(): this(Product())

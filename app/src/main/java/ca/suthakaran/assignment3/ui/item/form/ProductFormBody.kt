@@ -20,6 +20,7 @@ fun ProductFormBody(
     onPriceChange: (String) -> Unit,
     onQuantityChange: (String) -> Unit,
     onSaveClick: () -> Unit,
+    onBrandNameChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -31,6 +32,7 @@ fun ProductFormBody(
             onNameChange = onNameChange,
             onPriceChange = onPriceChange,
             onQuantityChange = onQuantityChange,
+            onBrandNameChange = onBrandNameChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(

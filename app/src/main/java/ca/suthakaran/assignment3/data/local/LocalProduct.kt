@@ -29,5 +29,8 @@ data class LocalProduct(
     val name: String,
     val price: Double,
     val quantity: Int,
-    val selected: Boolean
-)
+    val selected: Boolean,
+    val brandname: String
+) {
+
+}

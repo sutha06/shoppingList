@@ -25,7 +25,8 @@ fun ProductForm(
     onNameChange: (String) -> Unit,
     onPriceChange: (String) -> Unit,
     onQuantityChange: (String) -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    onBrandNameChange: (String) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -64,6 +65,21 @@ fun ProductForm(
             onValueChange = onQuantityChange,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             label = { Text(stringResource(R.string.quantity_req)) },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
+
+        OutlinedTextField(
+            value = productFormModel.brandName,
+            onValueChange = onBrandNameChange,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            label = { Text(stringResource(R.string.brandNamed)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,

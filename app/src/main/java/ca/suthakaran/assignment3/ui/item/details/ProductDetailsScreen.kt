@@ -192,6 +192,16 @@ fun ProductDetails(
                     )
                 )
             )
+            ProductDetailsRow(
+                labelResID = R.string.brandname,
+                productDetail = product.brandName,
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(
+                        id = R.dimen
+                            .padding_medium
+                    )
+                )
+            )
         }
 
     }
@@ -237,7 +247,9 @@ fun ProductDetailsScreenPreview() {
                     1,
                     "Pen",
                     6.25,
-                    0
+                    0,
+                selected = true,
+                brandName = "Bic"
                 )
         ), onSellItem = {}, onDelete = {})
     }

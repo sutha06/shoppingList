@@ -3,8 +3,8 @@ package ca.suthakaran.assignment3.ui.navigation
 import ca.suthakaran.assignment3.R
 
 object ProductDetailsDestination : NavigationDestination {
-    override val route = "item_details"
+    override val route = "product_details"
     override val titleRes = R.string.item_detail_title
-    const val productIdArg = "itemId"
+    const val productIdArg = "productId"
     val routeWithArgs = "$route/{$productIdArg}"
 }
