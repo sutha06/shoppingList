@@ -43,16 +43,16 @@ class MainViewModel @Inject constructor(
      */
     val mainUiState: StateFlow<MainUiState> =
         productsRepository.getAllProductsStream()
-            .map { list -> MainUiState(list.map { item -> item.toListProductModel() }) }
+            .map { list -> MainUiState(list.map { product -> product.toListProductModel() }) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
                 initialValue = MainUiState()
             )
 
-    fun toggleSelect(item: ListProductModel) {
+    fun toggleSelect(product: ListProductModel) {
         viewModelScope.launch {
-                productsRepository.updateProductSelectedById(item.id, !item.selected)
+                productsRepository.updateProductSelectedById(product.id, !product.selected)
         }
     }
 

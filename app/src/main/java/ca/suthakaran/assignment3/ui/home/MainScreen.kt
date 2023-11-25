@@ -96,7 +96,7 @@ fun MainScreen(
         },
     ) { innerPadding ->
         MainBody(
-            productList = mainUiState.itemList,
+            productList = mainUiState.productList,
             onItemClick = navigateToProductDetails,
             onToggleSelect = viewModel::toggleSelect,
             modifier = modifier
