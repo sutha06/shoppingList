@@ -41,6 +41,7 @@ class ProductDetailsViewModel @Inject constructor(
 
     private val productId: Int = checkNotNull(savedStateHandle[ProductDetailsDestination.productIdArg])
 
+
     /**
      * Holds the item details ui state. The data is retrieved from [ProductsRepository] and mapped to
      * the UI state.

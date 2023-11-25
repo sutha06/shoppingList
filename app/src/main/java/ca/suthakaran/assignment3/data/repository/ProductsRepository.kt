@@ -14,4 +14,6 @@ interface ProductsRepository {
     suspend fun updateProduct(product: Product)
     suspend fun updateProductQuantityById(id: Int, quantity: Int)
     suspend fun updateProductSelectedById(id: Int, selected: Boolean)
+
+
 }

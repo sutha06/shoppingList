@@ -198,6 +198,7 @@ private fun ShoppingProduct(
     }
 }
 
+@SuppressLint("ResourceType")
 @Preview(showBackground = true)
 @Composable
 fun MainBodyPreview() {
