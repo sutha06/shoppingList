@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
@@ -66,6 +67,8 @@ import ca.suthakaran.assignment3.ui.common.ShoppingTopAppBar
 import ca.suthakaran.assignment3.ui.model.ProductDetailsModel
 import ca.suthakaran.assignment3.ui.navigation.ProductDetailsDestination
 import ca.suthakaran.assignment3.ui.theme.ShoppingTheme
+import ca.suthakaran.assignment3.data.local.Priority // Import the Priority enum
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -149,7 +152,7 @@ private fun ProductDetailsBody(
 fun ProductDetails(
     product: ProductDetailsModel, modifier: Modifier = Modifier
 ) {
-    var selectedValue by rememberSaveable { mutableStateOf(1) }
+    var selectedPriority by rememberSaveable { mutableStateOf(Priority.HIGH) } // Default to HIGH priority
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -162,50 +165,78 @@ fun ProductDetails(
                 .padding(dimensionResource(id = R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
-            ProductDetailsRow(
-                labelResID = R.string.product,
-                productDetail = product.name,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
-            )
-            ProductDetailsRow(
-                labelResID = R.string.quantity_in_stock,
-                productDetail = product.quantity.toString(),
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
-            )
-            ProductDetailsRow(
-                labelResID = R.string.price,
-                productDetail = product.price,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
-            )
-            ProductDetailsRow(
-                labelResID = R.string.brandname,
-                productDetail = product.brandName,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
+            // ... (other product details)
+
+            // Priority selection row
+            PrioritySelectionRow(
+                selectedPriority = selectedPriority,
+                onPrioritySelected = { selectedPriority = it }
             )
         }
-
     }
 }
+
+@Composable
+private fun PrioritySelectionRow(
+    selectedPriority: Priority,
+    onPrioritySelected: (Priority) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(text = "Priority:")
+        Spacer(modifier = Modifier.weight(1f))
+
+        // Radio buttons for priority selection
+        PriorityRadioButton(
+            priority = Priority.HIGH,
+            selectedPriority = selectedPriority,
+            onPrioritySelected = onPrioritySelected
+        )
+        PriorityRadioButton(
+            priority = Priority.MEDIUM,
+            selectedPriority = selectedPriority,
+            onPrioritySelected = onPrioritySelected
+        )
+        PriorityRadioButton(
+            priority = Priority.LOW,
+            selectedPriority = selectedPriority,
+            onPrioritySelected = onPrioritySelected
+        )
+    }
+}
+
+@Composable
+private fun PriorityRadioButton(
+    priority: Priority,
+    selectedPriority: Priority,
+    onPrioritySelected: (Priority) -> Unit
+) {
+    val isSelected = priority == selectedPriority
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.selectable(
+            selected = isSelected,
+            onClick = { if (!isSelected) onPrioritySelected(priority) }
+        )
+    ) {
+        RadioButton(
+            selected = isSelected,
+            onClick = null, // Disable onClick on the RadioButton itself
+            modifier = Modifier.size(24.dp),
+            colors = RadioButtonDefaults.colors(
+                selectedColor = MaterialTheme.colorScheme.primary
+            )
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = priority.name)
+    }
+}
+
+
+
 
 @Composable
 private fun ProductDetailsRow(
